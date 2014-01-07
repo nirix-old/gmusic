@@ -1,6 +1,5 @@
 from gi.repository import Gtk, Gdk
-
-from about import AboutWindow
+from gmusic import VERSION
 
 UI_INFO = """
 <ui>
@@ -80,8 +79,15 @@ class WithMenu(object):
         return uimanager
 
     def on_help_about(self, widget):
-        about_win = AboutWindow()
-        about_win.show_all()
+        about = Gtk.AboutDialog()
+        about.set_program_name('GMusic')
+        about.set_version(VERSION)
+        about.set_website('https://github.com/nirix/gmusic')
+        about.set_comments("An open source Google Play Music client.")
+        about.set_copyright("(C) 2014 Jack Polgar")
+        about.set_license_type(Gtk.License.GPL_3_0)
+        about.run()
+        about.destroy()
 
     def on_menu_file_new_playlist(self, widget):
         print("File > New > Playlist selected")
